@@ -1,32 +1,36 @@
-jQuery(document).ready(function(){
-			//hadingling form submission
-			var options = { 
-		        beforeSubmit:  showRequest,
-		        success:       showResponse,
-		        dataType:  'json'
-		    };
-		    
-    		//adding datepicker
-			$("#dob").datepicker({format: 'yyyy-mm-dd'});
+$(window).load(function(){
+    $('.submit-button').prop("disabled", false);
+});
 
-			//jquery form validations
-			$("#test_form").validate({
-				rules: {
-					name: "required",
-					dob: "required",
-					email: {
-						required: true,
-						email: true
-					},
-					favorite_color: "required",
-				},
-				submitHandler: function() {
-					// alert("Submitted!")
-					$("#test_form").ajaxSubmit(options);
-				}
-			});
+$(document).ready(function(){
+	//hadingling form submission
+	var options = { 
+        beforeSubmit:  showRequest,
+        success:       showResponse,
+        dataType:  'json'
+    };
 
-		});
+	//adding datepicker
+	$("#dob").datepicker({format: 'yyyy-mm-dd'});
+
+	//jquery form validations
+	$("#test_form").validate({
+		rules: {
+			name: "required",
+			dob: "required",
+			email: {
+				required: true,
+				email: true
+			},
+			favorite_color: "required",
+		},
+		submitHandler: function() {
+			// alert("Submitted!")
+			$("#test_form").ajaxSubmit(options);
+		}
+	});
+
+});
 
 		// pre-submit callback 
 		function showRequest(formData, jqForm, options) { 
