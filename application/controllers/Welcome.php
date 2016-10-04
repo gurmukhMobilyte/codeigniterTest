@@ -20,6 +20,44 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		if( $this->input->post() )
+		{
+			$this->load->helper('security');
+
+			$this->form_validation->set_rules('name', 'Name', 'xss_clean|required');
+			$this->form_validation->set_rules('dob', 'Date of Birth', 'xss_clean|required');
+			$this->form_validation->set_rules('email', 'Email', 'xss_clean|required|valid_email');
+			$this->form_validation->set_rules('favorite_color', 'Favorite Color', 'xss_clean|required');
+			
+
+
+			if( $this->form_validation->run() == TRUE )
+			{
+
+				if( $this->db->insert( 'form_data', $this->input->post() ) )
+				{
+					$response['success'] = "Data added successfully.";
+				}
+				else
+				{
+					$response['unknown'] = "Unknown Error: Unable to add.";
+				}
+
+			}			
+			else
+			{
+				
+				if ( strlen( validation_errors() ) > 0 )
+				{
+					$response['errors'] = validation_errors('<li>','</li>');
+							
+				}	
+				
+				
+			}
+			echo json_encode($response);
+			die();
+		}
+		$this->load->view('form');
 	}
 }
