@@ -54,7 +54,7 @@
 				<label for="email">Favorite Color:</label>
 				<input type="color" class="form-control" id="favorite_color" name="favorite_color">
 			</div>
-			<button type="submit" class="btn btn-default">Submit</button>
+			<button type="submit" class="btn btn-default submit-button" disabled="disabled">Submit</button>
 		</form>
 	  </div>
 	  
